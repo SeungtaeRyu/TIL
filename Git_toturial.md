@@ -93,3 +93,5 @@
   4. `git remote add origin <원격 저장소 주소>` 
   5. `git push -u origin master` 
 
+- `git clone <원격 저장소 주소>` 명령어 
+  - 폴더를 만들고 싶은 위치의 상위 폴더에서 써야 한다
