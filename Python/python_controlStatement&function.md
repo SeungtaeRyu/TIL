@@ -13,11 +13,11 @@
   - [Decompositon(분해)](#Decompositon분해)
   - [Abstraction(추상화)](#Abstraction추상화)
   - [함수의 기초](#함수의-기초)
-    - [선언과 호출(define & call)](#선언과-호출define-&-call)
-    - [입력(`Input`)](#입력Input)
-    - [문서화(`Docsting`)](#문서화Docsting)
-    - [범위(`Scope`)](#범위Scope)
-    - [결과값(`Output`)](#결과값Output)
+    - 선언과 호출(`define` & `call`)
+    - 입력(`Input`)
+    - 문서화(`Docsting`)
+    - 범위(`Scope`)
+    - 결과값(`Output`)
   - [함수 응용](#함수-응용)
 - [모듈과 패키지](#모듈과-패키지)
 
@@ -446,7 +446,7 @@
 
   - 함수의 기본 구조
 
-    - 선언과 호출(define & call)
+    - 선언과 호출(`define` & `call`)
 
       ``` python
       # 선언
