@@ -7,14 +7,14 @@
 - [제어문](#제어문)
 
   - [조건문](#조건문)
-  - [조건표현식](#조건표현식)
+  - [조건 표현식](#조건-표현식)
   - [반복문](#반복문)
   - [반복문 제어](#반복문-제어)
 
 - [함수](#함수)
 
-  - [Decompositon(분해)](#Decompositon(분해))
-  - [Abstraction(추상화)](#Abstraction(추상화))
+  - [Decompositon(분해)](#Decompositon분해)
+  - [Abstraction(추상화)](#Abstraction추상화)
   - [함수의 기초](#함수의-기초)
 
   
