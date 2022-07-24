@@ -1,6 +1,8 @@
 def is_id_valid(user_data):
-    pass
-    # 여기에 코드를 작성합니다.
+    if str(0) <= user_data['id'][-1] <= str(9):
+        return True
+    else:
+        return False 
 
 
 # 아래의 코드는 수정하지 않습니다.

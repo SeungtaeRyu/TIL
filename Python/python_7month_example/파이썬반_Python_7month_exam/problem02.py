@@ -1,6 +1,9 @@
 def over(scores):
-    pass
-    # 여기에 코드를 작성합니다.
+    over_60_count = 0
+    for score in scores:
+        if score >= 60:
+            over_60_count += 1
+    return over_60_count
 
 
 # 아래의 코드는 수정하지 않습니다.

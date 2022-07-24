@@ -1,6 +1,8 @@
 def is_user_data_valid(user_data):
-    pass
-    # 여기에 코드를 작성합니다.
+    if user_data['id'] == "" or user_data['password'] == "":
+        return False
+    else:
+        return True
 
 
 # 아래의 코드는 수정하지 않습니다.

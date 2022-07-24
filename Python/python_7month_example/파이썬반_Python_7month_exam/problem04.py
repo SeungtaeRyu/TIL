@@ -1,6 +1,17 @@
+from re import L
+
+
 def turn(temperatures):
-    pass
-    # 여기에 코드를 작성합니다.
+    date_temperatures = {
+        "maximum": [],
+        "minimum": []
+    }
+
+    for idx in range(len(temperatures)):
+        date_temperatures["maximum"].append(temperatures[idx][0])
+        date_temperatures["minimum"].append(temperatures[idx][1])
+        
+    return date_temperatures
 
 
 # 아래의 코드는 수정하지 않습니다.
