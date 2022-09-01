@@ -16,7 +16,7 @@
 
 - pip freeze > requirements.txt
 
-- python manage.py shell_plus
+- python manage.py shell_plus   
 
 #### 2. 데이터 생성
 
