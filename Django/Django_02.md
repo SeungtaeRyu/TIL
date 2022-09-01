@@ -64,7 +64,7 @@
   
   - password 입력
   
-  - admin.py 파일 작성
+  - admin.py 파일 작성   
     
     ```python
     from django.contrib import admin
