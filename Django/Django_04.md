@@ -7,6 +7,7 @@
 - [authentication system](#authentication-system)
 - [Substituting a cutstom User model](#Substituting-a-cutstom-User-model)
 - [HTTP Cookies](#HTTP-Cookies)
+- [쿠키](#쿠키)
 - [Login](#Login)
 - [Logout](#Logout)
 - [Authentication with User](#Authentication-with-User)
