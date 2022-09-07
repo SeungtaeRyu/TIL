@@ -10,7 +10,7 @@
 - [Login](#Login)
 - [Logout](#Logout)
 - [Authentication with User](#Authentication-with-User)
-- [Limiting access to logged-in users](#Limiting access to logged-in users)
+- [Limiting access to logged-in users](#Limiting-access-to-logged-in-users)
 
 <br>
 
