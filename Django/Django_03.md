@@ -211,6 +211,104 @@
 
 
 
+<br>
+
+## ModelForm을 사용한  views.py 구조 수정
+
+#### 1. new - create => create
+
+```python
+@require_http_methods(['GET', 'POST'])
+def create(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article = form.save()
+            return redirect('articles:detail', article.pk)
+    else:
+        form = ArticleForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'articles/create.html', context)
+```
+
+#### 2. edit - update => update
+
+```python
+@require_http_methods(['GET', 'POST'])
+def update(request, pk):
+    article = Article.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, instance=article)
+        # form = ArticleForm(data=request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('articles:detail', article.pk)
+    else:
+        form = ArticleForm(instance=article)
+    context = {
+        'article': article,
+        'form': form,
+    }
+    return render(request, 'articles/update.html', context)
+```
+
+
+
+<br>
+
+## Decorator
+
+#### Allowed HTTP methods
+
+1. @require_http_methods()
+   - View 함수가 특정한 요청 method만 허용하도록 하는 데코레이터
+   - 예시) `@require_http_methods(['GET', 'POST'])`
+2. @require_POST()
+   - 포스트만 쓰는 Delete같은 곳에 사용
+   - 데코레이터 쓰면 POST처리 안해도 됨
+3. @require_safe()
+   - GET 요청에 대한 Decorator
+   - @require_GET이 있지만 @require_safe()를 권장
+   - 요청 방법이 다를 경우 405 Method Not Allowed
+
+
+
+
+
+<br>
+
+## 마무리
+
+- Django Form Class
+  - Django 프로젝트의 주요 유효성 검사 도구
+  - 공격 및 데이터 손상에 대한 중요한 방어 수단
+  - 유효성 검사에 대해 개발자에게 강력한 편의를 제공
+
+
+
+- View 함수 구조 변화
+  - HTTP requests 처리에 따른 구조 변화
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
