@@ -28,7 +28,7 @@
 
 이 둘을 합쳐서 인증 시스템이라고 한다.
 
-
+<br>
 
 #### 2. 사전 설정
 
@@ -40,7 +40,7 @@
   3. accounts/urls.py 파일 생성
   4. projects/urls.py에 accounts 경로 include
 
-
+<br>
 
 <br>
 
@@ -51,6 +51,8 @@
 - 커스텀 User 모델로 대체하기
   - bulit-in User model의 기본 인증 요구사항이 적절하지 않음
   - 그래서 Django는 현재 프로젝트에서 나타낼 User를 참조하는 `AUTH_USER_MODEL` 설정값을 제공하여 default user model을 재정의(override)할 수 있도록 함
+
+<br>
 
 #### 2. How to substituting a custom User model
 
@@ -93,7 +95,7 @@
 
 ![image-20220907101705049](Django_04.assets/image-20220907101705049.png)
 
-
+<br>
 
 #### [주의사항] 
 
@@ -118,6 +120,8 @@
      1. python manage.py makemigrations
      2. python manage.py migrate
 
+<br>
+
 #### [참고] AbstractUser
 
 - "관리자 권한과 함께 완전한 기능을 가지고 있는 User model을 구현하는 추상 기본 클래스"
@@ -127,7 +131,7 @@
 
 
 
-
+<br>
 
 <br>
 
@@ -138,7 +142,7 @@
 - 요청(requests) : 클라이언트(브라우저)에 의해 전송되는 메세지
 - 응답(response) : 서버에서 응답으로 전송되는 메세지
 
-
+<br>
 
 #### 2. HTTP 특징
 
@@ -152,7 +156,7 @@
 
 
 
-
+<br>
 
 <br>
 
@@ -165,7 +169,7 @@
   1. 브라우저(클라이언트)는 쿠키를 로컬에 **KEY-VALUE** 의 데이터 형식으로 저장
   2. 이렇게 쿠키를 저장해 놓았다가, **동일한 서버에 재요청 시 저장된 쿠키를 함께 전송**
 
-
+<br>
 
 #### 2. 쿠키 사용 목적
 
@@ -176,6 +180,8 @@
 3. 트래킹 (Tracking)
    - 사용자 행동을 기록 및 분석
 
+<br>
+
 #### 3. 세션
 
 - 사이트와 특정 브라우저 사이의 "state(상태)" 를 유지시키는 것
@@ -185,7 +191,7 @@
 - session id는 세션을 구별하기 위해 필요하며, 쿠키에는 session id만 저장
 - session 정보는 Django DB의 **django_session 테이블**에 저장
 
-
+<br>
 
 #### 4. 쿠키 Lifetime (수명)
 
@@ -195,7 +201,7 @@
 2. Persistent cookies
    - Expires 속성에 지정된 날짜 혹은 Max-Age 속성에 지정된 기간이 지나면 삭제됨
 
-
+<br>
 
 <br>
 
@@ -211,6 +217,8 @@
     - 기본적으로 username과 passsword를 받아 데이터가 유효한지 검증
   - requests를 첫번째 인자로 취함
 
+<br>
+
 #### 2. login()
 
 - login(request, user, backend=None)
@@ -218,10 +226,14 @@
 - 현재 세션에 연결하려는 인증 된 사용자가 있는 경우 사용
 - HttpRequest 객체와 User 객체가 필요
 
+<br>
+
 #### 3. get_user()
 
 - AuthenticationForm의 인스턴스 메서드
 - 유효성 검사를 통과했을 경우 로그인 한 사용자 객체를 반환
+
+<br>
 
 #### 4. 실습 예제
 
@@ -263,13 +275,17 @@
    {% endblock content%}
    ```
 
-   
+<br>
+
+<br>
 
 ## Logout
 
 #### 개요
 
 - 로그아웃은 Session을 Delete하는 과정
+
+<br>
 
 #### logout()
 
@@ -285,6 +301,8 @@
   2. 클라이언트의 쿠키에서도 sessionid를 삭제
 
   - 이는 다른 사람이 동일한 웹 브라우저를 사용하여 로그인하고, 이전 사용자의 세션 데이터에 엑세스하는 것을 방지하기 위함
+
+<br>
 
 #### 실습 예제
 
@@ -305,7 +323,7 @@
 
 
 
-
+<br>
 
 #### [참고] 현재 로그인 되어있는 유저 정보 출력하기
 
@@ -318,6 +336,8 @@
 
 <br>
 
+<br>
+
 ## Authentication with User
 
 #### 1. 개요
@@ -325,7 +345,7 @@
 - User Object와 User CRUD에 대한 이해
   - 회원 가입, 회원 탈퇴, 회원정보 수정, 비밀번호 변경
 
-
+<br>
 
 #### 2. 회원가입
 
@@ -374,7 +394,7 @@
      {% endblock content%}
      ```
 
-
+<br>
 
 #### 3. Custom user & built-in auth forms
 
@@ -392,9 +412,9 @@
   1. UserCreationForm
   2. UserChangeForm
 
+<br>
 
-
-#### 4. UserCrationForm() 커스텀 하기
+#### 4. UserCreationForm() 커스텀 하기
 
 1. forms.py
 
@@ -438,7 +458,7 @@
        return render(request, 'accounts/signup.html', context) 
    ```
 
-   
+<br>
 
 #### 5. 회원 탈퇴
 
@@ -455,7 +475,7 @@
    # 먼저 로그아웃 해버리면 해당 요청 객체 정보가 없어지기 때문에 탈퇴를 먼저해야함!
    ```
 
-   
+<br>
 
 #### 6. 회원정보 수정
 
@@ -495,7 +515,7 @@
 
 UserChangeForm에는  사용자가 접근하면 안될 관리자 권한의 fields까지 나오니 forms.py 의 CustomUserchangeForm Class의 **fields 정의하기**
 
-
+<br>
 
 #### 7. 비밀번호 변경
 
@@ -573,7 +593,7 @@ UserChangeForm에는  사용자가 접근하면 안될 관리자 권한의 field
 
     
 
-
+<br>
 
 <br>
 
@@ -583,7 +603,7 @@ UserChangeForm에는  사용자가 접근하면 안될 관리자 권한의 field
 
 - 로그인 사용자에 대한 접근 제한하기
 
-
+<br>
 
 #### 2. 로그인 사용자에 대해 접근을 제한하는 2가지 방법
 
@@ -655,7 +675,7 @@ UserChangeForm에는  사용자가 접근하면 안될 관리자 권한의 field
            return render(request, 'accounts/login', context)
        ```
 
-       
+<br>
 
 #### 3. 두 데코레이터로 인해 발생하는 구조적 문제 해결
 
