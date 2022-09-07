@@ -34,7 +34,7 @@
 
 - 두번째 app accounts 생성 및 등록 (accounts 절 대 권 장)
 
-  1. `python manage.py startapp accounts`
+  1. python manage.py startapp accounts
 
   2. settings.py에 APP 등록
   3. accounts/urls.py 파일 생성
