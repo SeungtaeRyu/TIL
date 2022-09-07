@@ -281,13 +281,13 @@
 
 ## Logout
 
-#### 개요
+#### 1. 개요
 
 - 로그아웃은 Session을 Delete하는 과정
 
 <br>
 
-#### logout()
+#### 2. logout()
 
 - logout(request)
 
@@ -304,7 +304,7 @@
 
 <br>
 
-#### 실습 예제
+#### 3. 실습 예제
 
 1. accounts/views.py
 
