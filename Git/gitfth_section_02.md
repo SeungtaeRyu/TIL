@@ -16,7 +16,7 @@
 
 - 새로운 실습폴더 생성 후 git init
 - .git이 있는 폴더에서 gistory 실행
-- 파일 생성후 add 하면 2개의 파일이 바뀜
+- 파일 생성후 add 하면 2개의 파일이 바뀐다
   - index
   - objects
   - 파일의 이름은 index에 담겨있고 내용은 objects에 담겨 있다
@@ -48,30 +48,30 @@
   - COMMIT_EDITMSG
   - refs/heads/master
 
-- 파일을 수정 후 add, commit 을 실행하면 objects 객체에 parent 정보(이전 커밋 정보)가 담김
+- 파일을 수정 후 add, commit 을 실행하면 objects 객체에 parent 정보(이전 커밋 정보)가 담긴다
 
 #### 정리
 
-- commit의 objects에는 중요한 정보 2개가 있다. 
+- commit의 objects에는 중요한 정보 2개가 있다
   1. tree
   2. parent
-- objects는 3가지 정도로 나뉨
+- objects는 3가지 정도로 나뉜다
   1. blob : 파일의 내용
-  2. tree : blob에 대한 정보를 담고 있음
-  3. commit : commit객체 주소를 담고 있음
+  2. tree : blob에 대한 정보를 담고 있다
+  3. commit : commit객체 주소를 담고 있다
 
 ​	<br>
 
 ## status의 원리
 
 - 파일이 변경 되었을 때
-  - index라는 파일과 가장 최근 commit의 내용이 같으면 git status에 변경사항이 없다고 보는듯?
+  - index 안 파일 내용과 working directory 내용이 다르면 git status에 변경사항이 있다고 본다
 
 - 파일을 add 했을 때 
   - index의 파일과 add된 파일의 내용이 같으면 commit 대기 상태라고 보는듯?
-  - 또한, index의 내용과 마지막 commit의  tree에서 가르키는 파일의 내용이 다르다면 commit 대기상태?
+  - 또한, index의 내용과 마지막 commit의  tree에서 가르키는 파일의 내용이 다르다면 commit 대기상태
 
-- commit을 하면 index, objects의 tree, 디렉토리의 파일 안 내용까지 세가지가 같아짐
+- commit을 하면 index, objects의 tree, 디렉토리의 파일 안 내용까지 세 가지가 같아진다
 - 이 때 git status를 하면 더이상 commit 할 것이 없다고 알려준다
 - 복잡한 개념은 구글 이미지 검색으로 찾아보기
   - git working directory vs index vs repository 검색
