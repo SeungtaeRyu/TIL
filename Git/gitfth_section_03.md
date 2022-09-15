@@ -1,4 +1,4 @@
-# secction03 git의 혁신 - branch
+# section03 git의 혁신 - branch
 
 <br>
 
