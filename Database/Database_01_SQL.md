@@ -241,10 +241,9 @@ CREATE TABLE contacts {
   UPDATE table_name
   SET column_1 = new_value_1,
       column_2 = new_value_2,
-  WHERE
-  	search_condition;
+  WHERE search_condition;
   ```
-
+  
 - DELETE : 테이블에서 행 제거
 
   ```
