@@ -26,7 +26,7 @@
    - 기본 키 (PK)
      - 기술적으로 다른 항목과 절대로 중복될 수 없는 **단일 값 (unique)**
 
-
+<br>
 
 #### 관계형 데이터베이스의 이점
 
@@ -34,7 +34,7 @@
 - 관련한 각 데이터에 쉽게 접근할 수 있음
 - 대량의 데이터도 효율적으로 관리 가능
 
-
+<br>
 
 #### RDBMS
 
@@ -53,7 +53,7 @@
 
 - 데이터를 관리하기 위해 설게된 **특수 목적의 프로그래밍 언어**
 
-
+<br>
 
 #### SQL Commands 종류
 
@@ -72,14 +72,14 @@
   - COMMIT
   - ROLLBACK
 
-
+<br>
 
 #### SQL Syntax
 
 - 모든 SQL 문은 키워드로 시작하고, 하나의 statement는 세미콜론(;) 으로 끝남
 - SQL 키워드는 대소문자를 구분하지 않지만 대문자 권장
 
-
+<br>
 
 #### Statement & Clause
 
@@ -194,6 +194,8 @@ CREATE TABLE contacts {
 - 데이터베이스 파일 열기 : .open mydb.sqlite3 입력
 - 종료하기 : .exit
 
+<br>
+
 #### Filtering data
 
 - SELECT
@@ -224,7 +226,7 @@ CREATE TABLE contacts {
       SELECT country, COUNT(*) FROM users GROUP BY country;
       ```
 
-
+<br>
 
 #### Changing data
 
