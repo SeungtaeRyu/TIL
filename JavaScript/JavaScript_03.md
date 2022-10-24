@@ -144,7 +144,12 @@
   - 버튼을 클릭하면 특정 변수 값 변경하기
 
     ```javascript
-    
+    const btn = document.querySelector('#btn')
+    btn.addEventListener('click', function (event) {
+        const pTag = document.querySelector('#counter')
+        countNum += 1
+        pTag.innerText = countNum
+    })
     ```
 
     <br>
@@ -152,6 +157,11 @@
   - input에 입력하면 입력 값을 실시간으로 출력하기
 
     ```javascript
+    const textInput = document.querySelector('#text-input')
+    textInput.addEventListener('input', function (event) {
+        const pTag = document.querySelector('p')
+        pTag.innerText = event.target.value
+    })
     ```
 
     <br>
@@ -159,6 +169,17 @@
   - input에 입력하면 입력 값을 실시간으로 출력하고 버튼을 클릭하면 출력된 값을 클래스를 토글하기
 
     ```javascript
+    const textInput = document.querySelector('input')
+    textInput.addEventListener('input', function (event) {
+        const h1Tag = document.querySelector('h1')
+        h1Tag.innerText = event.target.value
+    })
+      
+    const btn = document.querySelector('#btn')
+    btn.addEventListener('click', function (event) {
+        const h1Tag = document.querySelector('h1')
+        h1Tag.classList.toggle('blue')
+    })
     ```
 
     
