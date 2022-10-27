@@ -14,8 +14,6 @@
 
 ## 동기와 비동기
 
-<br>
-
 - #### 동기(Synchronous)
 
   - 모든 일을 **순서대로** 하나씩 처리하는 것
@@ -64,8 +62,6 @@
 
 ## JavaScript 의 비동기 처리
 
-<br>
-
 - #### JavaScript는 Single Thread 언어
 
   - JavaScript 자체는 Single Thread 이므로 비동기 처리를 할 수 있도록 도와주는 환경이 필요함
@@ -94,8 +90,6 @@
 <br>
 
 ## Axios
-
-<br>
 
 - #### 개요
 
@@ -137,8 +131,6 @@
 <br>
 
 ## Callback 과 Promise
-
-<br>
 
 - #### 콜백 함수 (Callback Function)
 
@@ -194,3 +186,18 @@
   1. 현재 실행 중인 Call Stack을 완료하기 이전에는 절대 호출되지 않음
   2. 비동기 작업이 성공 or 실패한 뒤 .then() 메서드를 이용하여 추가한 경우에도 1번과 똑같이 동작
   3. then()을 여러 번 사용하여 여러 개의 callback 함수를 추가할 수 있음 (Chaining)
+
+<br>
+
+<br>
+
+## AJAX
+
+- #### AJAX 의 특징
+
+  - 비동기 통신 웹 개발 기술을 Asynchronous Javascript And XML (AJAX)라 함
+  - 페이지 새로고침 없이 서버에 요청
+  - 서버로부터 응답(데이터)을 받아 작업을 수행
+
+<br>
+
