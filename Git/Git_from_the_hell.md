@@ -40,12 +40,10 @@
   - vim f1.txt
     - i 로 insert 모드, esc로 편집모드 종료
     - :wq를 적으면 저장(w) 후 나가기(q)
-    
-    - cat f1.txt
-      - 파일 안에 내용 보기
-    
-- git status
   
+  - cat f1.txt
+    - 파일 안에 내용 보기
+  - git status
 - git add f1.txt
 
 
@@ -57,11 +55,6 @@
     - git config --global user.name [user name]
     - git config --global user.email [user email]
     
-    - git commit
-      - vim 화면 출력
-      - :wq 엔터
-    
-- git log
 
 
 ​	<br>
@@ -133,16 +126,16 @@
   - 새로운 실습폴더 생성 후 git init
 
   - .git이 있는 폴더에서 gistory 실행
-    - 파일 생성후 add 하면 2개의 파일이 바뀐다
-      - index
-      - objects
-      - 파일의 이름은 index에 담겨있고 내용은 objects에 담겨 있다
-      - objects 앞의 2자리는 디렉토리 라고 말하는듯???
-
-
-  - f1.txt와 f3.txt의 내용이 같을 때 
-    - git은 파일 제목이 달라도 내용이 같으면 같은 objects 주소를 가르킨다
-
+  - 파일 생성후 add 하면 2개의 파일이 바뀐다
+    - index
+    - objects
+    - 파일의 이름은 index에 담겨있고 내용은 objects에 담겨 있다
+    - objects 앞의 2자리는 디렉토리 라고 말하는듯???
+  
+  
+    - f1.txt와 f3.txt의 내용이 같을 때 
+      - git은 파일 제목이 달라도 내용이 같으면 같은 objects 주소를 가르킨다
+  
 
 <br>
 
@@ -167,9 +160,10 @@
     - logs/HEAD
     - COMMIT_EDITMSG
     - refs/heads/master
-
-
-  - 파일을 수정 후 add, commit 을 실행하면 objects 객체에 parent 정보(이전 커밋 정보)가 담긴다
+  
+  
+    - 파일을 수정 후 add, commit 을 실행하면 objects 객체에 parent 정보(이전 커밋 정보)가 담긴다
+  
 
 
 <br>
@@ -182,8 +176,8 @@
 
   - objects는 3가지 정도로 나뉜다
     1. blob : 파일의 내용
-       1. tree : blob에 대한 정보를 담고 있다
-       2. commit : commit객체 주소를 담고 있다
+    2. tree : blob에 대한 정보를 담고 있다
+    3. commit : commit객체 주소를 담고 있다
 
 
 <br>
@@ -194,17 +188,22 @@
 
     - index 안 파일 내용과 working directory 내용이 다르면 git status에 변경사항이 있다고 본다
 
-    - 파일을 add 했을 때 
-      - index의 파일과 add된 파일의 내용이 같으면 commit 대기 상태라고 보는듯?
-      - 또한, index의 내용과 마지막 commit의  tree에서 가르키는 파일의 내용이 다르다면 commit 대기상태
-
-
-  - commit을 하면 index, objects의 tree, 디렉토리의 파일 안 내용까지 세 가지가 같아진다
-
-  - 이 때 git status를 하면 더이상 commit 할 것이 없다고 알려준다
-
-  - 복잡한 개념은 구글 이미지 검색으로 찾아보기
-    - git working directory vs index vs repository 검색
+  - 파일을 add 했을 때 
+    - index의 파일과 add된 파일의 내용이 같으면 commit 대기 상태라고 보는듯?
+    - 또한, index의 내용과 마지막 commit의  tree에서 가르키는 파일의 내용이 다르다면 commit 대기상태
+  
+  
+    - commit을 하면 index, objects의 tree, 디렉토리의 파일 안 내용까지 세 가지가 같아진다
+  
+  
+  
+    - 이 때 git status를 하면 더이상 commit 할 것이 없다고 알려준다
+  
+  
+  
+    - 복잡한 개념은 구글 이미지 검색으로 찾아보기
+      - git working directory vs index vs repository 검색
+  
 
 
 <br>
@@ -216,9 +215,9 @@
 - #### branch 만들기
 
   - git branch : 현재 branch 확인 
-    - git branch [branchName] : 브랜치 생성
+  - git branch [branchName] : 브랜치 생성
 
-      - 생성한 브랜치는 **생성했던 브랜치의 정보**를 그대로 가지고 온다
+    - 생성한 브랜치는 **생성했던 브랜치의 정보**를 그대로 가지고 온다
   
   
     - git checkout [branchName] : 브랜치 변경
