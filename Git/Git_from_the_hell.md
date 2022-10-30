@@ -4,7 +4,7 @@
 
 #### 목차
 
-- 01강 - 버전관리의 본질
+- [01강 - 버전관리의 본질](#01.-버전관리의-본질)
 - 02강 - git의 원리
 - 03강 - git의 혁신 - branch
 - 04강 - git의 원리
@@ -219,26 +219,56 @@
     - git branch [branchName] : 브랜치 생성
 
       - 생성한 브랜치는 **생성했던 브랜치의 정보**를 그대로 가지고 온다
-
-
-  - git checkout [branchName] : 브랜치 변경
+  
+  
+    - git checkout [branchName] : 브랜치 변경
+  
 
 
 <br>
 
 - #### branch 정보확인
 
+  - ```
+    git log --branches --decorate --graph --oneline
+    ```
+
+    - `--branches` : 모든 브랜치 확인
+    - `--graph` : 눈으로 확인
+    - `--oneline` : commit 하나 당 한 줄로 보기
+
+  - ```
+    git log master..exp
+    ```
+
+    - master에는 없고 exp 에는 있는 것들 확인
+
+  - ```
+    git diff master..exp
+    ```
+
+
 <br>
 
 - #### branch 병합
 
+  1. 합쳐지는 곳의 branch로 checkout 하기
+
+  2. ```
+     git merge [합칠 branch name]
+     ```
+
+  3. ```
+     git branch -d [합친 branch name]
+     ```
+
 <br>
 
-- #### branch 수련
+- #### stash
 
-<br>
+  - 브랜치에서 작업이 끝나지 않았는데 다른 브랜치에서 해결할 일이 있을 경우 사용!
+  - 그런 일이 발생했을 때 공부해도 늦지 않다!
 
-- #### stach
 
 <br>
 
@@ -248,13 +278,80 @@
 
 - #### branch
 
+<br>
+
 - #### branch 충돌 해결
+
+  1. Auto-merging [파일이름] 에러가 발생!
+
+  2. 충돌한 파일을 연다!
+
+  3. 사용자가 직접 파일을 수정 후 add, commit 하기!
+
+<br>
 
 - #### reset checkout
 
+  - reset이란 checkout 된 branch의 최신 커밋을 바꾸는 행위
+
+    - ```
+      git reset --hard [commit id]
+      ```
+
+  - reset을 취소하는 법
+
+    - ```
+      git reset --hard ORIG_HEAD
+      ```
+
+    - ```
+      git reflog
+      ```
+
+  - commit id로도 체크아웃을 할 수 있음!
+
+    - ```
+      git checkout [commit id]
+      ```
+
+    - HEAD는 branch 폴더 없이 commit을 직접 가르킴!
+
+
+<br>
+
 - #### working copy & index & repository
 
+  - reset 옵션이 건드리는 작업 영역
+
+    - ![image-20221030172039783](Git_from_the_hell.assets/image-20221030172039783.png)
+    - **옵션을 지정하지 않으면 `--mixed` 옵션이 지정된다**
+
+  - working directory 와 staging area의 상태를 비교하는 명령어
+
+    - ```
+      git diff
+      ```
+
+
+<br>
+
 - ####  merge & conflict
+
+  - kdiff3 오픈소스 사용하여 충돌 해결하기
+
+    1. 오픈소스 설치
+
+    2. ```
+       git config --global merge.tool kdiff3
+       ```
+
+    3. ```
+       git mergetool
+       ```
+
+    4. 화면의 A(조상), B(checkout branch), C(병합될 branch) 중 선택
+
+    5. 수정을 하고 싶다면 아무거나 선택하고 아래쪽에서 작업 
 
 - #### 3 way merge
 
