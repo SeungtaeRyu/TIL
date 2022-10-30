@@ -44,7 +44,6 @@
   - cat f1.txt
     - 파일 안에 내용 보기
   - git status
-- git add f1.txt
 
 <br>
 
