@@ -1,6 +1,6 @@
 # Web : 그리드 시스템/반응협 웹
 
---- 
+---
 
 ## 목차
 
@@ -17,6 +17,9 @@
   - bootstrap grid system
 
 - Responsive web
+
+
+<br>
 
 ---
 
