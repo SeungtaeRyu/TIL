@@ -4,9 +4,10 @@
 
 ## 목차
 
-- Vuex
-- Lifecycle Hooks
-- Todo with Vuex
+- [Vuex](#Vuex)
+- [Lifecycle Hooks](#Lifecycle-Hooks)
+- [Todo with Vuex](#Todo-with-Vuex)
+- [Local Storage](#Local-Storage)
 
 <br>
 
