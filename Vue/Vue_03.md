@@ -170,7 +170,7 @@
 
   - Vue instance가 생성된 후 호출됨
   - data, computed 등의 설정이 완료된 상태
-  - 서버에서 받은 데이터를 vue instance의 data에 할당하는 로직을 구현학 ㅣ적합
+  - 서버에서 받은 데이터를 vue instance의 data에 할당하는 로직을 구현하기 적합
   - 단, mount되지 않아 요소에 접근할 수 없음
 
 <br>
@@ -193,6 +193,111 @@
 
   - instance마다 각각의 Lifecycle을 가지고 있음
   - Lifecycle Hooks는 컴포넌트별로 정의할 수 있음
+
+<br>
+
+- #### Life Cycle Hooks 실습 (Get Cat Image)
+
+  - App.vue
+
+    ```vue
+    <template>
+      <div id="app">
+        <h1>Cat Image</h1>
+        <button @click="getCat">Get Cat</button><br>
+        <img :src="url" alt="">
+      </div>
+    </template>
+    
+    <script>
+    
+    export default {
+      name: 'App',
+      computed: {
+        url() {
+          return this.$store.state.url
+        }
+      },
+      methods: {
+        getCat() {
+          this.$store.dispatch('getCat')
+        }
+      },
+      created() {
+        this.getCat()
+      },
+      updated() {
+        console.log('이미지 리소스가 업데이트 되었습니다')
+      }
+    }
+    </script>
+    
+    <style>
+    #app {
+      font-family: Avenir, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+      color: #2c3e50;
+      margin-top: 60px;
+    }
+    </style>
+    
+    ```
+
+    <br>
+
+  - index.js
+
+    ```bash
+    $ npm i --save axios
+    ```
+
+    <br>
+
+    ```js
+    import Vue from 'vue'
+    import Vuex from 'vuex'
+    import axios from 'axios'
+    
+    Vue.use(Vuex)
+    
+    export default new Vuex.Store({
+      state: {
+        url: null,
+      },
+      getters: {
+      },
+      mutations: {
+        GET_URL(state, newUrl) {
+          state.url = newUrl
+        }
+      },
+      actions: {
+        getCat(context) {
+          axios({
+            methods: 'get',
+            url: 'https://api.thecatapi.com/v1/images/search'
+          })
+            .then((response) => {
+              const newUrl = response.data[0].url
+              context.commit('GET_URL', newUrl)
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        }
+      },
+      modules: {
+      }
+    })
+    ```
+
+    <br>
+
+  - 결과화면
+
+    ![image-20221108102009933](Vue_03.assets/image-20221108102009933.png)
 
 <br><br>
 
