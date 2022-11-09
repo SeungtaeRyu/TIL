@@ -130,7 +130,7 @@
 
   - 라우트(routes)에 컴포넌트를 매핑한 후, 어떤 URL에서 렌더링 할 지 알려줌
     - 즉, SPA를 MPA(multiple, SSR방식)처럼 URL을 이동하면서 사용 가능
-    - SPA의 단점 중 하나인 **"URL이 변경되지 않는다"**를 해결
+    - SPA의 단점 중 하나인 **"URL이 변경되지 않는다"** 를 해결
 
 <br>
 
@@ -326,4 +326,494 @@
       ]
       ```
 
-      
+
+<br><br>
+
+## Navigation Guard
+
+- #### 네비게이션 가드
+
+  - 특정 URL에 접근할 때 **다른 url로 redirect** 를 하거나 **해당 URL로의 접근을 막는** 방법
+
+<br>
+
+- #### 전역 가드
+
+  - 다른 url 주소로 이동할 때 항상 실행
+
+  - router/index.js에 **router.beforeEach()** 를 사용하여 설정
+
+  - 콜백 함수의 값으로 다음과 같이 3개의 인자를 받음
+
+    - to : 이동할 URL 정보가 담긴 Route 객체
+    - from : 현재 URL 정보가 담긴 Route 객체
+    - next : 지정한 URL로 이동하기 위해 호출하는 함수
+
+  - URL이 변경되어 화면이 전환되기 전 **router.beforeEach()** 가 호출됨
+
+  - 변경된 URL로 라우팅하기 위해서는 **next()** 를 호출해줘야 함
+
+    - **next()가 호출되기 전까지 화면이 전환되지 않음 (대기상태가 됨)**
+
+    ```js
+    // router/index.js
+    
+    //전역 가드
+    router.beforeEach((to, from, next) => {
+      // 로그인 여부 
+      const isLoggedIn = true
+    
+      // 로그인이 필요한 페이지
+      const authPages = ['hello']
+    
+      const isAuthRequired = authPages.includes(to.name)
+    
+      if (isAuthRequired && !isLoggedIn) {
+        console.log('login으로 이동')
+        next({ name: 'login' })
+      } else {
+        console.log('to로 이동')
+        next()
+      }
+    })
+    ```
+
+    
+
+<br>
+
+- #### 라우터 가드
+
+  - 전체 route가 아닌 특정 route에 대해서만 가드를 설정하고 싶을 때 사용
+
+  - **beforeEnter()**
+
+    - route에 진입했을 때 실행됨
+    - 라우터를 등록한 위치에 추가
+    - 단 매개변수, 쿼리, 해시 값이 변경될 때는 실행되지 않고 다른 경로에서 탐색할 때만 실행됨
+    - 콜백 함수 인자로 to, from, next를 받음
+
+    ```js
+    // router/index.js
+    
+    const routes = [
+        ...,
+      {
+        path: '/login',
+        name: 'login',
+        component: LoginView,
+        // 라우터 가드
+        beforeEnter(to, from, next) {
+          if (isLoggedIn === true) {
+            console.log('이미 로그인 되어 있음')
+            next({ name: from.name })
+          } else {
+            next()
+          }
+        }
+      },
+    ]
+    ```
+
+    
+
+<br>
+
+- #### 컴포넌트 가드
+
+  - 특정 컴포넌트 내에서 가드를 지정하고 싶을 때 사용
+
+  - **beforeRouteUpdate()**
+
+    - 해당 컴포넌트를 렌더링하는 경로가 변경될 때 실행
+
+    ```html
+    // views/HelloView.vue
+    
+    <script>
+    export default {
+      name: 'HelloView',
+      data() {
+        return {
+          userName: this.$route.params.userName
+        }
+      },
+      // 컴포넌트 가드
+      beforeRouteUpdate(to, from, next) {
+        this.userName = to.params.userName
+        next()
+      }
+    }
+    </script>
+    ```
+
+    
+
+<br>
+
+- #### 404 Not Found
+
+  - 요청한 리소스가 존재하지 않는 경우
+    - 애스터리스크 '*' 에서 404페이지로 redirect
+  - 형식은 유효하지만 특정 리소스를 찾을 수 없는 경우
+    - 해당 컴포넌트에서 axios.catch 구문에서 404페이지로 이동
+
+<br><br>
+
+## Articles with Vue
+
+- #### 개요
+
+  - 지금까지 배운 내용들을 종합하여 Django 에서 만들었던 게시판 만들기
+
+  - 구현기능
+
+    - Index
+    - Create
+    - Detail
+    - Delete
+    - 404
+
+  - 컴포넌트 구성
+
+    ![image-20221109153535040](Vue_04.assets/image-20221109153535040.png)
+
+<br>
+
+- #### 코드
+
+  1. store/index.js
+
+     ```js
+     import Vue from 'vue'
+     import Vuex from 'vuex'
+     
+     Vue.use(Vuex)
+     
+     export default new Vuex.Store({
+       state: {
+         article_id: 3,
+         articles: [
+           {
+             id: 1,
+             title: 'title',
+             content: 'content',
+             createAt: new Date().getTime(),
+           },
+           {
+             id: 2,
+             title: 'title2',
+             content: 'content2',
+             createAt: new Date().getTime(),
+           },
+         ]
+       },
+       getters: {
+       },
+       mutations: {
+         CREATE_ARTICLE(state, article) {
+           state.articles.push(article)
+           state.article_id = state.article_id + 1
+         },
+         DELETE_ARTICLE(state, article_id) {
+           state.articles = state.articles.filter((article) => {
+             return !(article.id === article_id)
+           })
+         }
+       },
+       actions: {
+         createArticle(context, payload) {
+           const article = {
+             id: context.state.article_id,
+             title: payload.title,
+             content: payload.content,
+             createAt: new Date().getTime()
+           }
+           context.commit('CREATE_ARTICLE', article)
+         }
+       },
+       modules: {
+       }
+     })
+     ```
+
+     <br>
+
+  2. router/index.js
+
+     ```js
+     import Vue from 'vue'
+     import VueRouter from 'vue-router'
+     import IndexView from '../views/IndexView.vue'
+     import CreateView from '../views/CreateView.vue'
+     import DetailView from '../views/DetailView.vue'
+     import NotFound404 from '../views/NotFound404.vue'
+     
+     Vue.use(VueRouter)
+     
+     const routes = [
+       {
+         path: '/',
+         name: 'index',
+         component: IndexView
+       },
+       {
+         path: '/create',
+         name: 'create',
+         component: CreateView
+       },
+       {
+         path: '/404-not-found',
+         name: 'NotFound404',
+         component: NotFound404
+       },
+       {
+         path: '/:id',
+         name: 'detail',
+         component: DetailView
+       },
+       {
+         path: '*',
+         redirect: { name: 'NotFound404' }
+       },
+     ]
+     
+     const router = new VueRouter({
+       mode: 'history',
+       base: process.env.BASE_URL,
+       routes
+     })
+     
+     export default router
+     
+     ```
+
+     <br>
+
+  3. views/IndexView.vue
+
+     ```vue
+     <template>
+       <div>
+         <h1>Articles</h1>
+         <router-link :to="{ name: 'create' }">게시글 작성</router-link>
+         <ArticleItem
+           v-for="article in articles" :key="article.id"
+           :article=article
+         />
+       </div>
+     </template>
+     
+     <script>
+     import ArticleItem from '@/components/ArticleItem'
+     
+     export default {
+       name: 'IndexView',
+       components: {
+         ArticleItem,
+       },
+       computed: {
+         articles() {
+           return this.$store.state.articles
+         }
+       }
+     }
+     </script>
+     
+     <style>
+     
+     </style>
+     ```
+
+     <br>
+
+  4. components/ArticleItem.vue
+
+     ```vue
+     <template>
+       <div @click="goDetail(article.id)">
+         <p>글 번호 : {{ article.id }}</p>
+         <p>글 제목 : {{ article.content }}</p>
+         <hr>
+       </div>
+     </template>
+     
+     <script>
+     export default {
+       name: 'ArticleItem',
+       props: {
+         article: Object,
+       },
+       methods: {
+         goDetail(id) {
+           this.$router.push({ name: 'detail', params: { id } })
+         }
+       }
+     }
+     </script>
+     
+     <style>
+     
+     </style>
+     ```
+
+     <br>
+
+  5. views/CreateView.vue
+
+     ```vue
+     <template>
+       <div>
+         <h1>게시글 작성</h1>
+         <form @submit.prevent="createArticle">
+           <input type="text" v-model.trim="title"><br>
+           <textarea v-model="content"></textarea><br>
+           <input type="submit">
+         </form>
+         <router-link :to="{ name: 'index' }">Home</router-link>
+       </div>
+     </template>
+     
+     <script>
+     export default {
+       name: 'CreateView',
+       data() {
+         return {
+           title: null,
+           content: null,
+         }
+       },
+       methods: {
+         createArticle() {
+           const title = this.title
+           const content = this.content
+           const payload = {
+             title,
+             content,
+           }
+           this.$store.dispatch('createArticle', payload)
+           this.$router.push({ name: 'index'})
+         }
+       }
+     }
+     </script>
+     
+     <style>
+     
+     </style>
+     ```
+
+     <br>
+
+  6. views/DetailView.vue
+
+     ```vue
+     <template>
+       <div>
+         <h1>Detail</h1>
+         <p>글 번호 : {{ article?.id }}</p>
+         <p>글 제목 : {{ article?.title }}</p>
+         <p>글 내용 : {{ article?.content }}</p>
+         <p>글 작성시간 : {{ articleCreateAt }}</p>
+         <button @click="deleteArticle">삭제</button><br>
+         <router-link :to="{ name: 'index' }">Home</router-link>
+       </div>
+     </template>
+     
+     <script>
+     export default {
+       name: 'DetailView',
+       data() {
+         return {
+           article: null,
+         }
+       },
+       computed: {
+         articles() {
+           return this.$store.state.articles
+         },
+         articleCreateAt() {
+           const article = this.article
+           const createAt = new Date(article?.createAt).toLocaleString()
+           return createAt
+         }
+       },
+       methods: {
+         getArticleById(id) {
+           // const id = this.$route.params.id
+           for (const article of this.articles) {
+             if (article.id === Number(id)) {
+               this.article = article
+               break
+             }
+           }
+           if(this.article === null) {
+             this.$router.push({ name: 'NotFound404' })
+           }
+         },
+         deleteArticle() {
+           this.$store.commit('DELETE_ARTICLE', this.article.id)
+           this.$router.push({ name: 'index' })
+         },
+       },
+       created() {
+         this.getArticleById(this.$route.params.id)
+       }
+     }
+     </script>
+     
+     <style>
+     
+     </style>
+     ```
+
+     <br>
+
+  7. views/NotFount404.vue
+
+     ```vue
+     <template>
+       <div>
+         <h1>404 Not Found</h1>
+       </div>
+     </template>
+     
+     <script>
+     export default {
+       name: 'NotFound404',
+     }
+     </script>
+     
+     <style>
+     
+     </style>
+     ```
+
+<br><br>
+
+- #### 결과화면
+
+  ![image-20221109170309331](Vue_04.assets/image-20221109170309331.png)
+
+  <br>
+
+  ![image-20221109170324289](Vue_04.assets/image-20221109170324289.png)
+
+  <br>
+
+  ![image-20221109170345314](Vue_04.assets/image-20221109170345314.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
