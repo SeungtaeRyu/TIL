@@ -225,7 +225,7 @@
 - #### 프로그래밍 방식 네비게이션
 
   - Vue 인스턴스 내부에서 라우터 인스턴스에 **$router** 로 접근할 수 있음
-  - 다른 URL로 이동하려면 **this.$router.push({ name:  'home' })**를 사용
+  - 다른 URL로 이동하려면 **this.$router.push({ name:  'home' })** 를 사용
   - 동작 원리는 선언적 방식과 같음
 
 <br>
@@ -253,31 +253,55 @@
 
   - **$route.params**로 변수에 접근 가능
 
-    - 다만 HTML에서 직접 사용하기 보다는 data에 넣어서 사용하는 것을 권장
-
-      ```vue
-      <template>
-        <div>
-          <h1>hello, {{ userName }}</h1>
-        </div>
-      </template>
-      
-      <script>
-      export default {
-        name: 'HelloView',
-        data() {
-          return {
-            userName: this.$route.params.userName
-          }
+    ```vue
+    <template>
+      <div>
+        <h1>hello, {{ userName }}</h1>
+      </div>
+    </template>
+    
+    <script>
+    export default {
+      name: 'HelloView',
+      data() {
+        return {
+          userName: this.$route.params.userName
         }
       }
-      </script>
-      ```
-
+    }
+    </script>
+    ```
+  
   - params를 이용하여 동적 인자 전달 가능
 
     ```html
     <router-link :to="{ name: 'hello', params: { userName: 'seungtae' } }"></router-link>
+    ```
+  
+  - **실습 (입력값을 동적 인자로 URL 이동하기)**
+  
+    ```vue
+    <template>
+      <div class="about">
+        <h1>This is an about page</h1>
+        <input type="text" v-model="inputName" @keyup.enter="goToHello">
+      </div>
+    </template>
+    
+    <script>
+    export default {
+      data() {
+        return {
+          inputName: null,
+        }
+      },
+      methods: {
+        goToHello() {
+          this.$router.push({ name: 'hello', params: { userName: this.inputName } })
+        }
+      }
+    }
+    </script>
     ```
 
 <br>
