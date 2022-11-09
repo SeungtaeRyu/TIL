@@ -460,7 +460,7 @@
 
 <br><br>
 
-## Articles with Vue
+## Articles app with Vue
 
 - #### 개요
 
