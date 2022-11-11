@@ -1,6 +1,6 @@
 # Django 02
 
-<br>
+<br><br>
 
 ## Model
 
