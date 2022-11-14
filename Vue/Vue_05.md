@@ -395,4 +395,4 @@
 
   4. 결과화면
 
-     ![image-20221114170138396](C:\Users\SSAFY\Desktop\TIL\Vue\assets\image-20221114170138396.png)
+     ![image-20221114170138396](Vue_05.assets/image-20221114170138396.png)
