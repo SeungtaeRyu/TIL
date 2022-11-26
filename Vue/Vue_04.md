@@ -8,6 +8,7 @@
 - [Vue Router](#Vue-Router)
 - [Navigation Guard](#Navigation-Guard)
 - [Articles app with Vue](#Articles-app-with-Vue)
+- [vuetube](#vuetube)
 
 <br>
 
@@ -805,9 +806,335 @@
 
 
 
+# vuetube
 
+- #### 개요
 
+![image-20221110162545064](Vue_04.assets/image-20221110162545064.png)
 
+<br>
+
+![image-20221110162632825](Vue_04.assets/image-20221110162632825.png)
+
+<br>
+
+- #### 코드 
+
+1. App.vue
+
+   ```vue
+   <template>
+     <div id="app">
+       <br><br>
+       <p>My First Youtube Project</p>
+       <TheSearchBar
+         @get-search-data="getSearchData"
+       />
+       <br>
+       <div id="main-div">
+         <VideoDetail
+           :selectedVideo="selectedVideo"
+         />
+         <VideoList
+           :videoList="videoList"
+           @choice-video="choiceVideo"
+         />
+       </div>
+     </div>
+   </template>
+   
+   <script>
+   import VideoList from '@/components/VideoList'
+   import TheSearchBar from '@/components/TheSearchBar'
+   import VideoDetail from '@/components/VideoDetail'
+   import axios from 'axios'
+   
+   export default {
+     name: 'App',
+     components: {
+       VideoList,
+       TheSearchBar,
+       VideoDetail,
+     },
+     data() {
+       return {
+         videoList: null,
+         selectedVideo: null,
+       }
+     },
+     methods: {
+       getSearchData(searchWord) {
+         const key = process.env.VUE_APP_YOUTUBE_API_KEY
+         const part = 'snippet'
+         const type = 'video'
+         const maxResults = '50'
+         const url = `https://www.googleapis.com/youtube/v3/search?key=${key}&part=${part}&type=${type}&q=${searchWord}&maxResults=${maxResults}`
+         axios({
+           method: 'get',
+           url: url
+         })
+           .then((response) => {
+             this.videoList = response.data.items
+             this.selectedVideo = this.videoList[0]
+           })
+           .catch((error) => {
+             console.log(error)
+           })
+       },
+       choiceVideo(selectedVideo) {
+         this.selectedVideo = selectedVideo
+       }
+     }
+   }
+   </script>
+   
+   <style>
+   #app {
+     font-family: Avenir, Helvetica, Arial, sans-serif;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     text-align: center;
+     color: #2c3e50;
+     margin-top: 60px;
+     margin: auto;
+     width: 1400px;
+   }
+   
+   #main-div {
+     display: flex;
+     flex-direction: row;
+   }
+   </style>
+   ```
+
+   <br>
+
+2. components / TheSearchBar.vue
+
+   ```vue
+   <template>
+     <div id="search-bar-div">
+       <b-form-input
+           id="input-formatter"
+           placeholder="검색어를 입력하세요"
+           v-model="searchWord" @keyup.enter="getSearchData"
+         ></b-form-input>
+     </div>
+   </template>
+   
+   <script>
+   export default {
+     name: 'TheSearchBar',
+     data() {
+       return {
+         searchWord: null,
+       }
+     },
+     methods: {
+       getSearchData() {
+         this.$emit('get-search-data', this.searchWord)
+         this.searchWord = ''
+       }
+     }
+   }
+   </script>
+   
+   <style>
+   #search-bar-div {
+     padding: 10px;
+   }
+   </style>
+   ```
+
+   <br>
+
+3. components / VideoDetail.vue
+
+   ```vue
+   <template>
+     <div id="detail-div" v-if="selectedVideo">
+       <iframe
+         :src="videoURL" 
+         width=800 height=480 
+         frameborder=0 
+         allowfullscreen>
+       </iframe>
+       <div id="description-div">
+         <h2>{{ title }}</h2>
+         <hr>
+         <p>{{ selectedVideo?.snippet.description }}</p>
+       </div>
+     </div>
+   </template>
+   
+   <script>
+   import _ from 'lodash'
+   
+   export default {
+     name: 'VideoDetail',
+     props: {
+       selectedVideo: Object,
+     },
+     computed: {
+       title() {
+         return _.unescape(this.selectedVideo?.snippet.title)
+       },
+       videoURL() {
+         return `https://www.youtube.com/embed/${this.selectedVideo?.id.videoId}`
+       }
+     }
+   }
+   </script>
+   
+   <style>
+   #detail-div {
+     margin-left: 10px;
+     margin-right: 10px;
+     width: 800px;
+   }
+   
+   #description-div {
+     padding: 10px;
+     box-shadow : rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+     border-radius: 10px;
+     width: 800px;
+     height: 200px;
+   }
+   
+   #description-div h2 {
+     font-size: 32px;
+     height: 77px;
+     text-overflow: ellipsis;
+     overflow: hidden;
+     word-break: break-word;
+     
+     display: -webkit-box;
+     -webkit-line-clamp: 2;
+     -webkit-box-orient: vertical
+   }
+   
+   #description-div p {
+     height: 48px;
+     overflow: hidden;
+   }
+   
+   
+   </style>
+   ```
+
+   <br>
+
+4. components / VideoList.vue
+
+   ```vue
+   <template>
+     <div id="video-list-div" v-if="videoList">
+       <VideoListItem
+         v-for="(video, index) in videoList" :key="index"
+         :video="video"
+         @choice-video="choiceVideo"
+       />
+     </div>
+   </template>
+   
+   <script>
+   import VideoListItem from '@/components/VideoListItem'
+   
+   export default {
+     name: 'VideoList',
+     components: {
+       VideoListItem,
+     },
+     props: {
+       videoList: Array,
+     },
+     methods: {
+       choiceVideo(selectedVideo) {
+         this.$emit('choice-video', selectedVideo)
+       }
+     }
+   }
+   </script>
+   
+   <style>
+   #video-list-div {
+     /* width: 1200px; */
+     height: 700px;
+     overflow-y: scroll;
+   }
+   </style>
+   ```
+
+   <br>
+
+5. components / VideoListItem.vue
+
+   ```vue
+   <template>
+     <div id="item-div" @click="choiceVideo">
+       <img :src="videoThumbnail" alt="" style="width:120px; height: 90px;">
+       <p>{{ videoTitle }}</p>
+     </div>
+   </template>
+   
+   <script>
+   import _ from 'lodash'
+   
+   export default {
+     name: 'VideoListItem',
+     props: {
+       video: Object,
+     },
+     computed: {
+       videoTitle() {
+         return _.unescape(this.video.snippet.title)
+       },
+       videoThumbnail() {
+         return this.video.snippet.thumbnails.default.url
+       }
+     },
+     methods: {
+       choiceVideo() {
+         this.$emit('choice-video', this.video)
+       }
+     }
+   }
+   </script>
+   
+   <style>
+   #item-div {
+     width: 540px;
+     /* height: 110px; */
+     display: flex;
+     flex-direction: row;
+     margin-left: 10px;
+     margin-right: 10px;
+     margin-bottom: 10px;
+     padding: 10px;
+     box-shadow : rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+     border-radius: 10px;
+   }
+   
+   #item-div p{
+     margin: 0px;
+     padding: 10px;
+     width: 400px;
+     text-overflow: ellipsis;
+     overflow: hidden;
+     word-break: break-word;
+     
+     display: -webkit-box;
+     -webkit-line-clamp: 3;
+     -webkit-box-orient: vertical
+   }
+   </style>
+   ```
+
+<br>
+
+- #### 결과 화면
+
+![image-20221110175529417](Vue_04.assets/image-20221110175529417.png)
 
 
 
