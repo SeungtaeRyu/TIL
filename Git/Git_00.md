@@ -185,4 +185,15 @@
   git config --global user.email 사용자이메일
   ```
 
-  
+
+<br><br>
+
+## 잔디 매꾸기
+
+1. git log 로 commit Hash 복사
+2. git rebase -i [commit Hash]
+3. 에디터 pick 부분을 edit 로 변경
+4. git commit --amend --no-edit --date="원하는 날짜"
+   - ex) Mon Aug 2 13:00:00 2022 +0900
+5. git rebase --continue
+6. git push -f origin main
