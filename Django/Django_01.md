@@ -9,7 +9,7 @@
 - [Sending and Retrieving form data](#Sending-and-Retrieving-form-data)
 - [Django URLs](#Django-URLs)
 
-<br>
+<br><br>
 
 ## Intro
 
@@ -172,7 +172,6 @@
     
     - 별도로 추가 코드를 작성하지 않음
     
-
   - `asgi.py`
     - Asynchronous Server Gateway Interface
     
@@ -180,15 +179,12 @@
     
     - 추후 배포 시에 사용하며 지금은 수정하지 않음
     
-
   - `settings.py`
     - Django 프로젝트 설정을 관리
     
-
   - `urls.py`
     - 사이트의 url과 적절한 views의 연결을 지정
     
-
   - `wsgi.py`
     - Web server Gateway Interface
     
@@ -196,7 +192,6 @@
     
     - 추후 배포 시에 사용하며 지금은 수정하지 않음
     
-
   - `manage.py`
     
     - Django 프로젝트와 다양한 방법으로 상호작용하는 커맨드라인 유틸리티
@@ -416,7 +411,7 @@
 
      - 표시할 변수를 수정할 때 사용
        - name 변수를 모두 소문자로 출력 : `{{ name|lower }}`
-
+    
      - 60개의 built-in template filters를 제공
 
 
@@ -469,13 +464,12 @@
     
     - 반드시 템플릿 최상단에 작성 되어야 함 (즉, 2개 이상 사용할 수 없음)
     
-
-  - `{% block content %}{% endblock content %}`
+- `{% block content %}{% endblock content %}`
     - 하위 템플릿에서 재지정(overridden)할 수 있는 블록을 정의
-
-    - 즉, 하위 템플릿이 채울 수 있는 공간
-
-    - 가독성을 높이기 위해 선택적으로 endblock 태그에 이름을 지정할 수 있음
+  
+  - 즉, 하위 템플릿이 채울 수 있는 공간
+  
+  - 가독성을 높이기 위해 선택적으로 endblock 태그에 이름을 지정할 수 있음
 
 
 <br>
