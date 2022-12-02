@@ -1,5 +1,7 @@
 # Django 02
 
+<br>
+
 ## Model
 
 #### 1. 테이블 작성법
@@ -46,13 +48,19 @@
 
 - article.delete()
 
+
+<br><br>
+
 ## 데이터 전송
 
 - #### form method
-  
+
   - form tag의 method 디폴트값은 GET 요청이다. 하지만 GET 요청을 url에 정보가 노출되기 떄문에 POST 방식을 쓴다. (CRUD 중 CUD를 POST 방식으로 씀)
-  
+
   - POST 방식은 권한이 필요하기 때문에 `{% csrf_token %}` 태그가 없으면 Django 서버는 요청에 대해 403 forbidden error로 응답한다.
+
+
+<br><br>
 
 ## admin 계정 생성
 
