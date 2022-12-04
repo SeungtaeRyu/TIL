@@ -18,12 +18,7 @@
 
 - Responsive web
 
-
-<br>
-
----
-
-## CSS layout
+<br><br>CSS layout
 
 ### 1. Float
 
@@ -77,30 +72,32 @@
     </html>
     ```
 
+<br>
+
 ### 2. Floxbox
 
 - CSS Flexible Box Layout
-  
+
   - 행과 열 형태로 아이템들을 배치하는 1차원 레이아웃 모델
-  
+
   - 축
     
     - main axis (메인 축)
     
     - cross axis (교차 축)
-  
+
   - 구성 요소
     
     - Flex Container (부모 요소)
     
     - Flex item (자식 요소)
-  
+
   - 이전까지 Normal Flow를 벗어나는 수단은 Float 혹은 Position
 
 - **Flex 속성**
-  
+
   - **배치 설정**
-    
+
     - **flex-direction**
       
       - Main axis : 기준 방향 설정
@@ -114,7 +111,7 @@
         - `column`
         
         - `column-reverse`
-    
+
     - **flex-wrap**
       
       - 아이템이 컨테이너를 벗어나는 경우 해당 영역 내에 배치되도록 설정
@@ -124,7 +121,7 @@
         - `wrap` : 넘치면 그 다음 줄로 배치
         
         - `wrap-reverse` : 
-    
+
     - **flex-flow**
       
       - flex-direction 과 flex-wrap의 shorthand
@@ -132,9 +129,9 @@
       - flex-direction 과 flex-wrap에 대한 설정 값을 차례로 작성
       
       - 예시) flex-flow: row nowrap;
-  
+
   - **공간 나누기**
-    
+
     - **jusify-content (main axis)**
       
       - `flex-start` (default) : 123-
@@ -148,7 +145,7 @@
       - `space-around` : -1--2--3-
       
       - `space-evenly` : -1-2-3-
-    
+
     - **align-content (cross axis)**
       
       - `flex-start`
@@ -164,9 +161,9 @@
       - `space-evenly`
       
       - `stretch`
-  
+
   - **정렬**
-    
+
     - **align-items (모든 아이템을 cross axis 기준으로)**
       
       - `flex-start`
@@ -174,20 +171,21 @@
       - `center`
       - `baseline`
       - `stretch` (default)
-    
+
     - **align-self (개별 아이템)**
       
       - 컨테이너 말고 직접적인 요소에 적용하면 됨!
-  
+
   - Flex에 적용하는 속성
-    
+
     - 기타 속성
-      
+
       - `flex-grow` : 남은 영역을 아이템에 분배
-      
+
       - `order` : 배치 순서
 
----
+
+<br><br>
 
 ## Bootstrap
 
