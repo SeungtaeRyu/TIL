@@ -8,7 +8,7 @@
 - [Callback과 Promise](#Callback-과-Promise)
 - [AJAX](#AJAX)
 
-<br>
+<br><br>
 
 ## 동기와 비동기
 
