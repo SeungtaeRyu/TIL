@@ -60,9 +60,9 @@
 
 ### 아키텍처 도식화
 
-![image-20230106094208725](C:\Users\SSAFY\AppData\Roaming\Typora\typora-user-images\image-20230106094208725.png)
+![image-20230106094756981](Architecture00.assets/image-20230106094756981.png)
 
-![image-20230106094000670](C:\Users\SSAFY\Desktop\ryuseungtae\TIL\Architecture\Architecture00.assets\image-20230106094000670.png)
+![image-20230106094000670](Architecture00.assets/image-20230106094000670.png)
 
 
 
