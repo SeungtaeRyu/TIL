@@ -4,7 +4,7 @@
 
 ## JQL
 
-### JQL이란?
+### JQL이란? 
 
 - Jira Query Language
 - Jira Issue를 구조적으로 검색 하기 위해 제공하는 언어
