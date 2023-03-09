@@ -197,3 +197,13 @@
    - ex) Mon Aug 2 13:00:00 2022 +0900
 5. git rebase --continue
 6. git push -f origin main
+
+
+
+
+
+## GITLAP 미러링
+
+1. git clone --mirror [원본 저장소(A) 주소]
+2. git remote set-url --push origin [이동할 원격 저장소(B) 주소]
+3. git push --mirror
